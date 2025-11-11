@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Send } from "lucide-react";
 
@@ -14,44 +13,52 @@ export default function ChatPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0b132b] to-[#1c2a56] text-white px-8 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center text-blue-400">
-          AI Fitness Chat
-        </h1>
+    <>
 
-        <div className="border border-gray-700 bg-[#111b33] rounded-2xl shadow-md flex flex-col h-[500px]">
-          <div className="flex-1 overflow-y-auto p-6 space-y-2">
+      <main className="min-h-screen bg-gradient-to-b from-[#0b132b] to-[#1c2a56] text-white px-6 py-14">
+        <h1 className="text-center text-4xl font-bold text-blue-400">
+          AI <span className="text-blue-200">Fitness Coach</span>
+        </h1>
+        <p className="text-center text-gray-300 mt-2">
+          Get instant answers and motivation.
+        </p>
+
+        <div className="max-w-4xl mx-auto bg-[#111b33] border border-blue-900 p-6 rounded-xl mt-10">
+          <h2 className="font-semibold text-blue-300 mb-4">💬 Chat with Your Coach</h2>
+
+          <div className="h-[350px] overflow-y-auto border border-blue-800 p-4 rounded-lg bg-[#0f1a33] text-sm">
             {chat.length === 0 ? (
               <p className="text-center text-gray-400 italic">
-                Start chatting with your AI fitness coach 💬
+                "Every rep counts. You’ve got this. 💪"
               </p>
             ) : (
               chat.map((msg, i) => (
-                <p key={i} className="text-gray-200">
+                <p key={i} className="text-gray-200 mb-2">
                   {msg}
                 </p>
               ))
             )}
           </div>
 
-          <div className="border-t border-gray-700 flex items-center px-4 py-3">
+          {/* Input */}
+          <div className="flex mt-4 gap-3">
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-1 bg-transparent outline-none text-white px-2"
+              className="flex-1 px-4 py-2 rounded-lg bg-[#0d1630] border border-blue-800 text-white outline-none"
+              placeholder="Ask anything about workouts, meals, habits..."
             />
             <button
               onClick={handleSend}
-              className="text-blue-400 hover:text-blue-500"
+              className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg flex items-center gap-2 transition"
             >
-              <Send size={20} />
+              <Send size={18} />
+              Send
             </button>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

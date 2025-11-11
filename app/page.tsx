@@ -4,26 +4,6 @@ import { Dumbbell, UtensilsCrossed, Bot } from "lucide-react"; // icons
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-900 text-white flex flex-col">
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-4 bg-gray-800 shadow-lg">
-        <div className="flex items-center gap-3">
-          <Image
-            src="/dumbbell.png"
-            alt="FitMind Logo"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <h1 className="text-2xl font-bold text-blue-400">FitMind</h1>
-        </div>
-        <ul className="flex gap-6 text-gray-300">
-          <li><a href="#" className="hover:text-blue-400">Home</a></li>
-          <li><a href="#" className="hover:text-blue-400">Plan</a></li>
-          <li><a href="#" className="hover:text-blue-400">Chat</a></li>
-          <li><a href="#" className="hover:text-blue-400">About</a></li>
-        </ul>
-      </nav>
-
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-20">
         <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-blue-400">AI-Powered Fitness Platform</h2>

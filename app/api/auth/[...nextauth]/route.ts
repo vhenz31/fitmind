@@ -1,17 +1,17 @@
-import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
+import { compare } from "bcryptjs";
 
+// Fake in-memory user (for testing)
 const users = [
   {
     id: "1",
     email: "test@example.com",
-    password: "$2b$10$a0aN3KTJCrA9jXagtCbIXuq9WAlF3pbYnIMO0DxBKQgzMsa7/momW", // password123
+    password: "$2b$10$a0aN3KTJCrA9jXagtCbIXuq9WAlF3pbYnIMO0DxBKQgzMsa7/momW", // "password123"
   },
 ];
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -21,14 +21,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         const user = users.find((u) => u.email === credentials?.email);
-        if (!user) return null;
-
-        const isMatch = bcrypt.compareSync(
-          credentials!.password,
-          user.password
-        );
-
-        if (isMatch) {
+        if (user && (await compare(credentials!.password, user.password))) {
           return { id: user.id, email: user.email };
         }
         return null;
@@ -39,9 +32,9 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const, // ✅ Fix the type issue here
   },
-  secret: process.env.NEXTAUTH_SECRET || "mysecret",
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);

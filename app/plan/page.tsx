@@ -2,7 +2,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Brain, Home, Target, MessageCircle, User, Dumbbell, Utensils } from 'lucide-react';
+import { Brain, Target, Dumbbell, Utensils } from 'lucide-react';
+
 
 export default function HomePage() {
   const [age, setAge] = useState('');
@@ -137,39 +138,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
-      {/* Navigation - Same as Homepage */}
-      <nav className="border-b border-slate-700 bg-slate-900/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center gap-2">
-              <Brain className="text-blue-400" size={28} />
-              <span className="text-xl font-bold">FitMind</span>
-            </div>
-            <div className="flex gap-6">
-              <a href="#" className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors">
-                <Home size={18} />
-                Home
-              </a>
-              <a href="#" className="flex items-center gap-1 text-blue-400 font-semibold">
-                <Target size={18} />
-                Plan
-              </a>
-              <a href="#" className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors">
-                <MessageCircle size={18} />
-                Chat
-              </a>
-              <a href="#" className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors">
-                <User size={18} />
-                About
-              </a>
-            </div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">

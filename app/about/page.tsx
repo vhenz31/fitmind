@@ -2,51 +2,61 @@
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0b132b] to-[#1c2a56] text-white px-8 py-16">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl font-bold text-blue-400 mb-6">
-          About FitMind
-        </h1>
+    <>
 
-        <p className="text-gray-300 text-lg leading-relaxed mb-12">
-          FitMind is your AI-powered fitness partner that helps you stay on
-          track with smart workouts, nutrition planning, and personalized
-          coaching — all designed to make your journey fun and effective.
-        </p>
+      <main className="min-h-screen bg-gradient-to-b from-[#0b132b] to-[#1c2a56] text-white px-6 py-16">
+        <section className="max-w-5xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-blue-400">
+            About <span className="text-blue-200">FitMind</span>
+          </h1>
+          <p className="text-gray-300 mt-4 leading-relaxed">
+            FitMind transforms fitness by combining artificial intelligence with proven
+            health science. Personalized fitness plans, smart meal guidance, and
+            continuous AI-driven coaching — anytime, anywhere.
+          </p>
+        </section>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-[#111b33] rounded-xl p-6 shadow-md border border-gray-700 hover:border-blue-500 transition">
-            <div className="text-2xl mb-2">🧠</div>
-            <h2 className="text-lg font-semibold text-blue-400 mb-2">
-              Smart AI Plans
-            </h2>
+        {/* Feature Boxes */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-12">
+          <div className="bg-[#111b33] border border-blue-900 p-6 rounded-xl shadow-lg">
+            <h3 className="text-blue-300 font-semibold mb-2">🤖 AI-Powered Intelligence</h3>
             <p className="text-gray-400 text-sm">
-              Receive dynamic fitness and meal recommendations powered by AI.
+              Tailored workout & meal plans based on your unique body and fitness profile.
             </p>
           </div>
 
-          <div className="bg-[#111b33] rounded-xl p-6 shadow-md border border-gray-700 hover:border-blue-500 transition">
-            <div className="text-2xl mb-2">💪</div>
-            <h2 className="text-lg font-semibold text-blue-400 mb-2">
-              Personalized Coaching
-            </h2>
+          <div className="bg-[#111b33] border border-blue-900 p-6 rounded-xl shadow-lg">
+            <h3 className="text-blue-300 font-semibold mb-2">🎯 Goal-Oriented System</h3>
             <p className="text-gray-400 text-sm">
-              Get tailored advice and motivation from your AI wellness coach.
+              Whether you aim to lose fat, gain muscle, or improve performance — we guide you.
             </p>
           </div>
 
-          <div className="bg-[#111b33] rounded-xl p-6 shadow-md border border-gray-700 hover:border-blue-500 transition">
-            <div className="text-2xl mb-2">🔒</div>
-            <h2 className="text-lg font-semibold text-blue-400 mb-2">
-              Safe & Private
-            </h2>
+          <div className="bg-[#111b33] border border-blue-900 p-6 rounded-xl shadow-lg">
+            <h3 className="text-blue-300 font-semibold mb-2">⚡ Instant Personalized Results</h3>
             <p className="text-gray-400 text-sm">
-              Your health data stays secure while you focus on reaching your
-              goals.
+              Receive dynamic, clear, and actionable plans instantly.
             </p>
           </div>
-        </div>
-      </div>
-    </main>
+
+          <div className="bg-[#111b33] border border-blue-900 p-6 rounded-xl shadow-lg">
+            <h3 className="text-blue-300 font-semibold mb-2">📚 Science-Based Guidance</h3>
+            <p className="text-gray-400 text-sm">
+              We base recommendations on real research, fitness science, and nutrition data.
+            </p>
+          </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="max-w-5xl mx-auto bg-[#122045] p-8 rounded-xl shadow-lg mt-16 text-center">
+          <h2 className="text-2xl font-bold text-blue-300 mb-4">Our Mission</h2>
+          <p className="text-gray-300 leading-relaxed">
+            We believe that everyone deserves professional-grade fitness support.
+            FitMind brings expert-level training and nutrition guidance powered by AI —
+            making a healthier lifestyle accessible to everyone.
+          </p>
+        </section>
+      </main>
+    </>
   );
 }
