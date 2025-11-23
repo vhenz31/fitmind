@@ -1,15 +1,7 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
-
-// Fake in-memory user (for testing)
-const users = [
-  {
-    id: "1",
-    email: "test@example.com",
-    password: "$2b$10$a0aN3KTJCrA9jXagtCbIXuq9WAlF3pbYnIMO0DxBKQgzMsa7/momW", // "password123"
-  },
-];
+import { prisma } from "@/app/lib/prisma";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -20,8 +12,15 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = users.find((u) => u.email === credentials?.email);
-        if (user && (await compare(credentials!.password, user.password))) {
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
+
+        const user = await prisma.user.findFirst({
+          where: { email: credentials.email },
+        });
+
+        if (user && (await compare(credentials.password, (user as any).password))) {
           return { id: user.id, email: user.email };
         }
         return null;
@@ -32,7 +31,7 @@ export const authOptions: AuthOptions = {
     signIn: "/login",
   },
   session: {
-    strategy: "jwt" as const, // ✅ Fix the type issue here
+    strategy: "jwt" as const,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

@@ -1,16 +1,23 @@
+
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "loading") return; // Do nothing while loading
+    if (session) router.push("/plan"); // Redirect if logged in
+  }, [session, status, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +29,7 @@ export default function LoginPage() {
         redirect: false,
         email,
         password,
-        callbackUrl: "/plan"
+        callbackUrl: "/plan",
       });
 
       if (res?.error) {
@@ -36,6 +43,11 @@ export default function LoginPage() {
       setIsLoading(false);
     }
   };
+
+  if (status === "loading" || session) {
+    // Optionally render nothing or a loading message while redirecting
+    return null;
+  }
 
   return (
     <main className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#0b1221] px-4 py-12">
@@ -91,7 +103,7 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-          
+
           <div className="mt-6 pt-6 border-t border-gray-700 text-center">
             <Link
               href="/signup"

@@ -9,9 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.0",
     "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "google-auth-library": "^10.5.0",
     "lucide-react": "^0.548.0",
     "mongodb": "^7.0.0",
+    "mongoose": "^8.20.1",
     "next": "16.0.1",
     "next-auth": "^4.24.13",
     "openai": "^6.7.0",
@@ -25,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "prisma": "^6.19.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
