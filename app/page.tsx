@@ -264,25 +264,23 @@ export default function Home() {
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <UtensilsCrossed className="text-green-400" />
-                  <h3 className="text-xl font-bold">Meal Plan</h3>
+                  <h2 className="text-xl font-bold">Meal Plan</h2>
                 </div>
-                <h4 className="text-lg font-semibold text-green-400 mb-2">
-                  {selectedPlan.mealPlan.title}
-                </h4>
-                <p className="text-gray-300 mb-4">{selectedPlan.mealPlan.description}</p>
+                <h3 className="text-lg font-semibold text-green-400 mb-4">{selectedPlan.mealPlan.title}</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">{selectedPlan.mealPlan.description}</p>
                 
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {selectedPlan.mealPlan.meals.map((meal, index) => (
                     <div key={index} className="border-l-4 border-green-500 pl-4 bg-gray-700/50 p-3 rounded">
                       <div className="flex justify-between items-start mb-2">
-                        <h5 className="font-semibold">{meal.time}</h5>
-                        <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">
-                          {meal.calories} • {meal.protein}
-                        </span>
+                        <h4 className="font-semibold text-lg">{meal.time}</h4>
+                        <div className="text-sm bg-green-500/20 text-green-300 px-3 py-1 rounded-full">
+                          {meal.calories} • {meal.protein} protein
+                        </div>
                       </div>
-                      <ul className="space-y-1">
+                      <ul className="space-y-2">
                         {meal.foods.map((food, foodIndex) => (
-                          <li key={foodIndex} className="text-gray-300 text-sm flex items-start gap-2">
+                          <li key={foodIndex} className="text-slate-300 flex items-start gap-2">
                             <span className="text-green-400 mt-1">•</span>
                             {food}
                           </li>
@@ -307,7 +305,7 @@ export default function Home() {
         </p>
         <div className="flex gap-4">
           <a
-            href={user ? "/generate" : "/login"}
+            href={user ? "/plan" : "/login"}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md font-semibold transition"
           >
             Start Now
