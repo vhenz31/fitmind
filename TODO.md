@@ -1,34 +1,45 @@
-# TODO: Implement Saved Generated Plans Feature
+# TODO: Fix API Authentication and Signup Errors on Vercel Deployment
 
-## 1. Extend Prisma Schema
-- Add a `Plan` model linked to `User`
-- Fields: id, userId (relation), title, description, workout JSON, mealPlan JSON, createdAt
-- Run Prisma migration
-- Generate Prisma client
+## Problem Summary
+- 400 Bad Request error on `api/auth/me` endpoint: This endpoint does not exist in the codebase and is likely caused by invalid or misconfigured client or external calls.
+- 401 Unauthorized error on `api/auth/callback/credentials`: Caused by invalid credentials or authorization failures in the NextAuth credentials provider.
+- 500 Internal Server Error on `api/signup`: Likely caused by database connection issues, invalid inputs, or exceptions in the signup API handler.
 
-## 2. Update Generate Plan API (app/api/generate-plan/route.ts)
-- Extract logged-in user info from session/auth token
-- After generating plan, save plan data to database with the userId
-- Return generated plan as response
+## Step-by-Step Plan
 
-## 3. Create API to Fetch Saved Plans (e.g. app/api/plan/route.ts)
-- Endpoint: GET /api/plan
-- Identify logged-in user from session/auth token
-- Fetch all saved plans from database for the user
-- Return saved plans as JSON response
+1. **Verify Environment Variables on Vercel Deployment**
+   - Ensure the following environment variables are set correctly in Vercel dashboard (Settings > Environment Variables):
+     - `NEXTAUTH_SECRET`: Used by NextAuth for JWT signing; must be a secure, random string.
+     - `DATABASE_URL`: Connection string for the database, used by Prisma.
+   - Redeploy application after setting the variables.
 
-## 4. Update Plan Page (app/plan/page.tsx)
-- Fetch saved plans from new API on page load
-- Display saved plans in UI
-- Optionally maintain option to generate new plan
-- Show list/cards of saved plans with workout and meal details
+2. **Check User Credentials and Database State**
+   - Confirm test users exist in the database with correct emails and bcrypt-hashed passwords.
+   - If needed, create test user or use signup route locally to generate a valid user.
 
-## 5. Testing
-- Test login flow redirects to /plan
-- Test generated plans are saved in DB
-- Test saved plans are fetched and displayed correctly
-- Test UI and error handling
+3. **Review NextAuth Credentials Provider**
+   - Confirm the `authorize` function correctly returns user object on valid credentials.
+   - Ensure no additional user fields are required downstream which might cause issues.
+
+4. **Investigate `api/auth/me` Calls**
+   - Search client code or external integrations calling `/api/auth/me`.
+   - Remove or correct calls to non-existent `/api/auth/me` endpoint.
+   - Consider replacing with calls to `getSession()` or NextAuth's built-in session handling.
+
+5. **Improve Error Logging in Production**
+   - Add more detailed logging in `api/signup` and NextAuth callbacks to capture failure reasons.
+   - Deploy and monitor logs in Vercel to get insights into failures.
+
+6. **Test the Fixes**
+   - Test signup and signin flows locally and in deployed environments.
+   - Confirm no 4xx or 5xx errors occur.
+   - Validate session handling and protected routes.
+
+## Followup Steps
+- If errors persist after environment variable verification, share logs to analyze error messages.
+- Check for additional middleware or custom code affecting authentication.
+- Validate Prisma schema and migration status on production database.
 
 ---
 
-This plan enables users to see their saved generated plans after login.
+This plan provides a comprehensive approach to addressing the API errors you are facing on Vercel deployment.
